@@ -9,7 +9,7 @@ public class ServerThread extends Thread {
     private Socket sockComm;
     BufferedReader br;
     PrintStream ps;
-    private int id;
+    private int id = 0;
     private ServerData data;
     // autres attributs nécessaires aux traitements des requête
 
@@ -33,12 +33,37 @@ public class ServerThread extends Thread {
     }
 
     public void requestLoop()throws IOException {
-            // code identique à celui du canevas serveur mono-threadé
+        ps.println(id);
+        System.out.println("Client "+id+" connecté");
+        data.addUser(String.valueOf(id));
+        id++;
+
+        while(true){
+            processResponse();
+        }
+
     }
 
-    public void processRequest1() throws IOException {
-            // code adapté du canevas serveur mono-threadé en utilisant
-            // l'attribut data pour traiter les requêtes.
+    public void processResponse() throws IOException {
+        String line = br.readLine();
+        System.out.println("Client "+id+" received response from server: "+line);
+        String[] request = line.split(" ");
+        try{
+            switch (request[1]) {
+                case "reactionTime" ->{
+                    data.getUserData(request[0]).addHeartRateData(Double.valueOf(request[2]));
+                    ps.println("OK");
+                }
+                default ->{
+                    ps.println("Err_format");
+                    throw new IOException();
+                }
+            }
+        }
+        catch(Exception e){
+            ps.println("Err_format");
+        }
+
     }
 
         // etc. avec les autres méthodes processRequestX()
