@@ -56,7 +56,7 @@ class PositionClient  {
             String cmd = "a";
             while(!cmd.isEmpty()) {
                 cmd = sc.nextLine();
-                ps.println(userID+" reactionTime 2.5");
+                ps.println(cmd);
 
                 System.out.println(br.readLine());
             }

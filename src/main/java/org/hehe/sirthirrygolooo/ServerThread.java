@@ -50,18 +50,36 @@ public class ServerThread extends Thread {
         String[] request = line.split(" ");
         try{
             switch (request[1]) {
-                case "reactionTime" ->{
+                case "addHeartRate" ->{
                     data.getUserData(request[0]).addHeartRateData(Double.valueOf(request[2]));
                     ps.println("OK");
                 }
+                case "getUserHeartRates" ->{
+                    ps.println(data.getUserHeartRateData(request[0]));
+                }
+                case "addReactionTime" ->{
+                    data.getUserData(request[0]).addReactionTime(Double.valueOf(request[2]));
+                    ps.println("OK");
+                }
+                case "getReactionTimes" ->{
+                    ps.println(data.getUserData(request[0]).getReactionTime());
+                }
                 default ->{
-                    ps.println("Err_format");
                     throw new IOException();
                 }
             }
         }
+        catch(NumberFormatException e){
+            System.out.println("Error : "+e);
+            ps.println("Err_req_value_format");
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Error : "+e);
+            ps.println("Err_id");
+        }
         catch(Exception e){
-            ps.println("Err_format");
+            System.out.println("Error : "+e);
+            ps.println("Err_req_format");
         }
 
     }

@@ -19,6 +19,10 @@ public class ServerData {
         return this.data.get(id);
     }
 
+    public HashMap<Double,String> getUserHeartRateData(String id) {
+        return this.data.get(id).getHeartRateData();
+    }
+
     public String addUser(String id) {
         this.data.put(id, new UserData());
         return id;

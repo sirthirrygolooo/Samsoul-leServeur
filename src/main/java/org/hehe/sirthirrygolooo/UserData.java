@@ -1,15 +1,26 @@
 package org.hehe.sirthirrygolooo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
+
+
 class UserData{
+
+    private String formatDateNow(){
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return now.format(formatter);
+    }
+
+
     private final ArrayList<Double> reactionTime;
-    private final HashMap<Double,Long> heartRateData;
-    private final HashMap<Double,Long> RightAccelerometerData;
-    private final HashMap<Double,Long> LeftAccelerometerData;
-    private final HashMap<Double,Long> bodyTemperatureData;
+    private final HashMap<Double,String> heartRateData;
+    private final HashMap<Double,String> RightAccelerometerData;
+    private final HashMap<Double,String> LeftAccelerometerData;
+    private final HashMap<Double,String> bodyTemperatureData;
 
     UserData() {
         this.heartRateData = new HashMap<>();
@@ -24,24 +35,28 @@ class UserData{
         return reactionTime;
     }
 
-    public HashMap<Double, Long> addHeartRateData(Double rt) {
-        heartRateData.put(rt,new Date().getTime());
+    public ArrayList<Double> getReactionTime() {
+        return reactionTime;
+    }
+
+    public HashMap<Double, String> addHeartRateData(Double rt) {
+        heartRateData.put(rt,formatDateNow());
         return heartRateData;
     }
 
 
-    public HashMap<Double, Long> getHeartRateData() {
+    public HashMap<Double, String> getHeartRateData() {
         return heartRateData;
     }
 
-    public HashMap<Double, Long> getRightAccelerometerData() {
+    public HashMap<Double, String> getRightAccelerometerData() {
         return RightAccelerometerData;
     }
 
-    public HashMap<Double, Long> getLeftAccelerometerData() {
+    public HashMap<Double, String> getLeftAccelerometerData() {
         return LeftAccelerometerData;
     }
-    public HashMap<Double, Long> getBodyTemperatureData() {
+    public HashMap<Double, String> getBodyTemperatureData() {
         return bodyTemperatureData;
     }
 
