@@ -42,12 +42,12 @@ class PositionClient  {
             System.out.println("User id : " + userID);
 
 
-            ps.println(userID+" reactionTime 2.2");
+            ps.println(userID+" addReactionTime 2.2");
 
             System.out.println(br.readLine());
 
 
-            ps.println(userID+" reactionTime 2.5");
+            ps.println(userID+" addReactionTime 2.5");
 
             System.out.println(br.readLine());
 

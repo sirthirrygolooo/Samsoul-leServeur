@@ -46,8 +46,9 @@ public class ServerThread extends Thread {
 
     public void processResponse() throws IOException {
         String line = br.readLine();
-        System.out.println("Client "+id+" received response from server: "+line);
+
         String[] request = line.split(" ");
+        System.out.println("Client "+ request[0] +" received response from server: "+line);
         try{
             switch (request[1]) {
                 case "addHeartRate" ->{
@@ -61,7 +62,7 @@ public class ServerThread extends Thread {
                     data.getUserData(request[0]).addReactionTime(Double.valueOf(request[2]));
                     ps.println("OK");
                 }
-                case "getReactionTimes" ->{
+                case "getUserReactionTimes" ->{
                     ps.println(data.getUserData(request[0]).getReactionTime());
                 }
                 default ->{
