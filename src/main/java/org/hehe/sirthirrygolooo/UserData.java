@@ -47,9 +47,9 @@ class UserData{
         return reactionTime;
     }
 
-    public HashMap<Double, String> addHeartRateData(Double rt) {
+    public Double addHeartRateData(Double rt) {
         heartRateData.put(rt,formatDateNow());
-        return heartRateData;
+        return rt;
     }
 
 
@@ -61,11 +61,23 @@ class UserData{
         return RightAccelerometerData;
     }
 
+    public void addRightAccelerometerData(Double rt) {
+        RightAccelerometerData.put(rt,formatDateNow());
+    }
+
     public HashMap<Double, String> getLeftAccelerometerData() {
         return LeftAccelerometerData;
     }
+
+    public void addLeftAccelerometerData(Double rt) {
+        LeftAccelerometerData.put(rt,formatDateNow());
+    }
+
     public HashMap<Double, String> getBodyTemperatureData() {
         return bodyTemperatureData;
+    }
+    public void addBodyTemperatureData(Double rt) {
+        bodyTemperatureData.put(rt,formatDateNow());
     }
 
 }

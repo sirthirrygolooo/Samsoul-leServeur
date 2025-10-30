@@ -1,7 +1,5 @@
 package org.hehe.sirthirrygolooo;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 
@@ -21,7 +19,7 @@ public class ServerData {
                 '}';
     }
 
-    public UserData getUserData(String id) {
+    UserData getUserData(String id) {
         return this.data.get(id);
     }
 
@@ -30,9 +28,11 @@ public class ServerData {
     }
 
     public String addUser(String id) {
-        this.data.put(id, new UserData());
+        if (this.data.get(id) ==  null) {
+            this.data.put(id, new UserData());
+            return id;
+        }
         return id;
     }
-
 
 }
