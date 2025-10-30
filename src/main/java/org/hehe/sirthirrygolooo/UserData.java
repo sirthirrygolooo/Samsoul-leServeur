@@ -22,6 +22,14 @@ class UserData{
     private final HashMap<Double,String> LeftAccelerometerData;
     private final HashMap<Double,String> bodyTemperatureData;
 
+    public String toString(){
+        return "Reaction Time: " + this.reactionTime +
+                "\nHeart Rate Data: " + this.heartRateData +
+                "\nRight Accelerometre: "+this.RightAccelerometerData +
+                "\nLeft Accelerometre: "+this.LeftAccelerometerData +
+                "\nBody Temperature: " + this.bodyTemperatureData + "\n";
+    }
+
     UserData() {
         this.heartRateData = new HashMap<>();
         this.RightAccelerometerData = new HashMap<>();

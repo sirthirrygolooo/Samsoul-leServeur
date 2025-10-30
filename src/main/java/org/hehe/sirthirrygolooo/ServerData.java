@@ -15,6 +15,12 @@ public class ServerData {
         this.data = new HashMap<>();
     }
 
+    public String toString() {
+        return "ServerData{" +
+                "data=" + data +
+                '}';
+    }
+
     public UserData getUserData(String id) {
         return this.data.get(id);
     }

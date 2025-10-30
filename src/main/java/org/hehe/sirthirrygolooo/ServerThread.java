@@ -65,6 +65,9 @@ public class ServerThread extends Thread {
                 case "getUserReactionTimes" ->{
                     ps.println(data.getUserData(request[0]).getReactionTime());
                 }
+                case "getAll" -> {
+                    System.out.println(data);
+                }
                 default ->{
                     throw new IOException();
                 }
