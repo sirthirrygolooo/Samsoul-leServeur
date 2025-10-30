@@ -1,23 +1,23 @@
 package org.hehe.sirthirrygolooo.MongoDBTest;
 
 import com.mongodb.*;
-import com.mongodb.reactivestreams.client.MongoCollection;
+import com.mongodb.reactivestreams.client.*;
 import org.bson.Document;
-
 import reactor.core.publisher.Mono;
-
-import com.mongodb.reactivestreams.client.MongoClient;
-import com.mongodb.reactivestreams.client.MongoClients;
-import com.mongodb.reactivestreams.client.MongoDatabase;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import static com.mongodb.client.model.Filters.eq;
 
 public class QueryDatabase {
     public static void main(String[] args) {
-        // Replace the placeholder with your Atlas connection string
-        String uri = "mongodb+srv://remycacaruhel_db_user:bonsoir@clustersamsoul.ku08vkx.mongodb.net/?appName=ClusterSamsoul";
+        // Charger les variables depuis le .env
+        Dotenv dotenv = Dotenv.load();
 
-        // Construct a ServerApi instance using the ServerApi.builder() method
+        String username = dotenv.get("DB_USERNAME");
+        String password = dotenv.get("DB_PASSWORD");
+
+        String uri = "mongodb+srv://" + username + ":" + password + "@clustersamsoul.ku08vkx.mongodb.net/?appName=ClusterSamsoul";
+
         ServerApi serverApi = ServerApi.builder()
                 .version(ServerApiVersion.V1)
                 .build();
@@ -27,10 +27,10 @@ public class QueryDatabase {
                 .serverApi(serverApi)
                 .build();
 
-        // Create a new client and connect to the server
         try (MongoClient mongoClient = MongoClients.create(settings)) {
             MongoDatabase database = mongoClient.getDatabase("sample_mflix");
             MongoCollection<Document> movies = database.getCollection("movies");
+
             Mono.from(movies.find(eq("title", "Back to the Future")))
                     .doOnSuccess(i -> System.out.println(i))
                     .doOnError(err -> System.out.println("Error: " + err.getMessage()))

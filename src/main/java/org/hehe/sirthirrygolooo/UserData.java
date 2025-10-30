@@ -24,10 +24,10 @@ class UserData{
 
     public String toString(){
         return "Reaction Time: " + this.reactionTime +
-                "\nHeart Rate Data: " + this.heartRateData +
-                "\nRight Accelerometre: "+this.RightAccelerometerData +
-                "\nLeft Accelerometre: "+this.LeftAccelerometerData +
-                "\nBody Temperature: " + this.bodyTemperatureData + "\n";
+                ",\nHeart Rate Data: " + this.heartRateData +
+                ",\nRight Accelerometre: "+this.RightAccelerometerData +
+                ",\nLeft Accelerometre: "+this.LeftAccelerometerData +
+                ",\nBody Temperature: " + this.bodyTemperatureData + "\n";
     }
 
     UserData() {

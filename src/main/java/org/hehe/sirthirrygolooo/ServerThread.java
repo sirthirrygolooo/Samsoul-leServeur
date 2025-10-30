@@ -1,5 +1,7 @@
 package org.hehe.sirthirrygolooo;
 
+import org.hehe.sirthirrygolooo.Exceptions.MatchingIdException;
+
 import java.io.*;
 import java.net.*;
 
@@ -36,7 +38,7 @@ public class ServerThread extends Thread {
         ps.println(id);
         System.out.println("Client "+id+" connecté");
         data.addUser(String.valueOf(id));
-        id++;
+
 
         while(true){
             processResponse();
@@ -48,9 +50,18 @@ public class ServerThread extends Thread {
         String line = br.readLine();
 
         String[] request = line.split(" ");
-        System.out.println("Client "+ request[0] +" received response from server: "+line);
+
+        System.out.println("Client "+ id +" received response from server: "+line);
+
+
+
         try{
-            switch (request[1]) {
+
+            if(!request[0].equals(String.valueOf(id))){
+                throw new MatchingIdException(request[0]);
+            }
+
+               switch (request[1]) {
                 case "addHeartRate" ->{
                     data.getUserData(request[0]).addHeartRateData(Double.valueOf(request[2]));
                     ps.println("OK");
@@ -67,11 +78,16 @@ public class ServerThread extends Thread {
                 }
                 case "getAll" -> {
                     System.out.println(data);
+                    ps.println("OK");
                 }
                 default ->{
                     throw new IOException();
                 }
             }
+        }
+        catch(MatchingIdException e){
+            System.out.println("Error : "+e);
+            ps.println("Err_wrong_id");
         }
         catch(NumberFormatException e){
             System.out.println("Error : "+e);
